@@ -584,6 +584,7 @@
           </div>
         </div>
       </div>
+  
       <div class="col-lg-4 col-md-6">
         <div class="st-portfolio-single st-style1 st-lightgallery">
           <div class="st-portfolio-item">
@@ -751,6 +752,8 @@
     </div>
     <div class="st-height-b25 st-height-lg-b25"></div>
 </h1>
+
+
   <!-- Start Footer Seciton -->
   <footer>
     <div class="container">
@@ -765,20 +768,36 @@
   <!-- Scripts -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
  <script>
+  //descargar imagen Flyermin.webp de firebase storage y guardarla en una variable local llamada imageUrl
+  var storageRef = firebase.storage().ref();
+  var spaceRef = storageRef.child('Flyermin.webp');
+  var imageUrl;
+  spaceRef.getDownloadURL().then(function(url) {
+    imageUrl = url;
+  }).catch(function(error) {
+    console.log(error);
+  });
+  //funcion para insertar la imagen en el html
+  function insertarImagen() {
+    document.getElementById("imagen").src = imageUrl;
+  } 
+
   // Esperar 5 segundos y mostrar el mensaje
   setTimeout(function() {
     Swal.fire({
       title: 'MARCA LOS CUATRO TOROS', 
       text: 'Por un distrito mejor, por un distrito con futuro.',
-      imageUrl: 'https://firebasestorage.googleapis.com/v0/b/fir-whatsapp-checkout.appspot.com/o/Flyer%20855-min.webp?alt=media&token=c6472d8e-0cc7-4d4a-8d2c-1e5265bc85bd',
+      imageUrl: `${imageUrl}`,
       confirmButtonText: 'De acuerdo 😁',
       confirmButtonColor: 'red',
       background: 'white', 
-      imageWidth: 450,
-      imageHeight: 450,
+      imageWidth: 400,
+      imageHeight: 400,
       imageAlt: 'Custom image',
     })
   },8500);
+
+ 
  </script>
   <script src="assets/js/jquery-1.12.4.min.js"></script>
   <script src="assets/js/jquery.slick.min.js"></script>
